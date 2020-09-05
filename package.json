@@ -1,14 +1,19 @@
 {
   "name": "angular-desktop-demo",
   "version": "1.0.0",
+  "main": "launch-app.js",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"ng serve\" \"npm run electron\"",
-    "build": "ng build",
+    "start": "concurrently \"ng serve\" \"npm run electron:dev\"",
+    "start:prod": "concurrently \"ng serve\" \"npm run electron\"",
+    "build": "npm run clean && ng build",
     "test": "ng test",
+    "clean": "rimraf dist packages",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron" :"electron ./src/electron"
+    "electron:dev": "electron ./src/launch-app.dev",
+    "electron": "electron ./src/launch-app",
+    "package:win": "npm run build && cross-var electron-packager dist $npm_package_name --out=packages --platform=win32 --arch=x64 --overwrite "
   },
   "private": true,
   "dependencies": {
@@ -33,7 +38,9 @@
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "concurrently": "^5.3.0",
+    "cross-var": "^1.1.0",
     "electron": "^10.1.0",
+    "electron-packager": "^15.1.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",
@@ -42,6 +49,7 @@
     "karma-jasmine": "~3.3.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
+    "rimraf": "^3.0.2",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.9.5"

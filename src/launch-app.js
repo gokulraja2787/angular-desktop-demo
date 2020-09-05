@@ -14,13 +14,14 @@ const createWindow = () => {
 
     // and load the index.html of the app.
     win.loadURL(url.format({
-        pathname: 'localhost:4200',
-        protocol: 'http:',
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file:',
         slashes: true
     }));
 
     // Enable the below line for dev tools
     //win.webContents.openDevTools();
+    //win.maximize();
 
     // Emitted when the window is closed.
     win.on('closed', () => {
